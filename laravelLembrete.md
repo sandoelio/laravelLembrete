@@ -4,31 +4,22 @@
 baixar o composer e instalar para verificar usar o comando 'composer'.
 <br>
 ## 2º Instalação do Laravel e projeto em pasta especifica
-Este comando do composer vai baixar o laravel em um diretório (pasta) chamada “name-project” '
 composer create-project --prefer-dist laravel/laravel name-project'
 <br>
 ## 3º Cria o banco de dados sem as tabelas.
 <br>
 
 ## 4º Configurações do banco mysql
-no arquivo.env,precisa configurar nome da aplicação e URL :
-APP_NAME=EspecializaTi_Curso_Laravel 
-APP_URL=http://dev.laravel 
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=name_database
-DB_USERNAME=root
-DB_PASSWORD=
-<br>
+env.
+
 ##5º Gerar migrates
 php artisan migrate (caso as tabelas ja tenha sido criadas)
 devem começar com create e terminar com table (Exemplo:create_password_resets_table)
-'php artisan make:migration create_products_table'
-						OU
+'php artisan make:migration create_products_table' OU
 opção menos -m indica que é para criar o Model e também o arquivo de migration
 'php artisan make:model Product –m'
 <br>
+
 ##6º Definir dados no migrates
 Schema::create('nome_tabela_aqui', function (Blueprint $table) { 
 	$table->increments('id');// Id da tabela (chave primária e incremento)
@@ -50,32 +41,18 @@ para atualizar: php artisan migrate:refresh
 Para criar um controller e seu CRUD
 'php artisan make:controller CategoryController --resource'
 
-index() – Para listar as categorias
-create() – Para exibir o formulário de inserção de um nova categoria
-store() – Para salvar a categoria (inserir no banco de dados)
-show() – Para exibir os detalhes da categoria
-edit() – Exibir o formulário para editar a categoria
-update() – Para atualizar os dados da categoria
-destroy() – Para excluir a(s) categoria(s)
-<br>
 ##9º Rotas
-$this->get($uri, $callback);
-$this->post($uri, $callback);
-$this->put($uri,'NomeController@nomeMetodo');
-$this->patch($uri,'NomeController@nomeMetodo');
-$this->delete($uri,'NomeController@nomeMetodo');
-$this->options($uri,'NomeController@nomeMetodo');
-			OU
 Route::resource('url','NomeController@nomeMetodo');->funciona se o controller feito com resource
 Route::get('url','NomeController@nomeMetodo');->retornar algo, como por exemplo uma listagem
 Route::post('url','NomeController@nomeMetodo');->cadastrar algo no sistema
 Route::put('url','NomeController@nomeMetodo');->editar algum registro.
 Route::delete('url','NomeController@nomeMetodo');->para deletar algo.
-Route::options('url','NomeController@nomeMetodo');
 Route::any('url','NomeController@nomeMetodo');->aceita qualquer requisição, não importa se é GET, POST, PUT, PATH ou DELETE
+
 ###Rotas Nomeadas
 Route::get('contact', 'SiteControler@contact')->name('contact');
-Route::get('post/{id}', 'PostControler@show')->name('post.show');->com parametro
+Route::get('post/{id}', 'PostControler@show')->name('post.show');
+
 ###Grupo de Rotas:
 //admin
 Route::group(['prefix' => 'admin'], function(){
@@ -84,53 +61,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'AdminController@index');
     //Equivale ao acessar: http://sua-app.dev/admin
 });
+
 ###Middleware:
 permitir acesso a apenas usuários autenticados
 Route::get('financeiro','FinanceiroController@index')->middleware('auth');
-<br>
-
-#Lembretes
-<br>
-
-##Usando os metodos do controller para cadastro de user
-método store() e index()
-
-'Construct'
-private $usuario;
-public function __construct(User $usuario){
-     $this->usuario = $usuario;
-}
-public function index()
-    {
-        $title = 'Titulo teste';
-        return view('painel.form', compact('title'));    
-    }
-public function store(Request $request)
-{
-    $dataForm = $request->all(); ->recebe todos os dados do form
-    $insert = $this->usuario->create($dataForm); ->insere
-    if ($insert) 
-        return redirect()->route('cadastro.index');->cadastro e o nome na url e index o controller
-    else
-        return redirect()->route('cadastro.create');   
-}
-<br>
-
-
-##coloca no formulario seguranca
-{!! csrf_field() !!} -> O mesmo vale para as rotas POST, PUT e DELETE
-
-Rotas PUT, PATH ou DELETE:
-Para enviar requisições para uma destas rotas precisa especificar o método de envio na requisição
-
-<form method="POST" action="/usuario/12">
-    <!--Precisa enviar o tokem-->
-    {!! csrf_field() !!}
-    <!--Espeficica o tipo de envio (verbo http)-->
-    <input type="hidden" name="_method" value="PUT">
-    <!-- Ou -->
-    {{ method_field('PUT') }}
-</form>
 <br>
 
 ## Login sem admiinlte
