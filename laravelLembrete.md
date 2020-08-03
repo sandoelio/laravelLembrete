@@ -194,3 +194,7 @@ form so funciona com esse :{!! Form:: open(['route'=>'mail.store', 'method' => '
 
 ## Chamando um arquivo JS no laravel
    <script type="text/javascript" src="<?php echo asset('public/js/funcao.js')?>"></script>
+## Comando para criar Model/Controller/Rotas ao mesmo tempo
+   php artisan make:model Product --mcr
+## Comando para dropar dados e criar novamente as migrate
+   php artisan migrate:fresh
