@@ -133,9 +133,9 @@ form so funciona com esse :{!! Form:: open(['route'=>'mail.store', 'method' => '
 ## Comando para dropar dados e criar novamente as migrate
    php artisan migrate:fresh
 ## Gere migrações do Laravel de um banco de dados existente, incluindo índices e chaves estrangeiras! laravel 5.8 abaixo
-   1- composer require --dev " xethron / migrations-generator " (versao 5)
+  ### 1- composer require --dev " xethron / migrations-generator " (versao 5)
       composer require --dev " xethron / migrations-generator: ~ 1.3.0 " (versao 4)
-   2- O próximo passo será acessar o arquivo de configuração da aplicação que está em /config/app.php e adicionar estes providers: (versoes abaixo do 5)
+  ### 2- O próximo passo será acessar o arquivo de configuração da aplicação que está em /config/app.php e adicionar estes providers: (versoes abaixo do 5)
    	Way\Generators\GeneratorsServiceProvider::class,
 	Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
-   3- php artisan migrate:generate (depois Y / e depois 0 para confirmar)
+  ###  3- php artisan migrate:generate (depois Y / e depois 0 para confirmar)
