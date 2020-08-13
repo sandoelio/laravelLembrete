@@ -4,7 +4,7 @@
 baixar o composer e instalar para verificar usar o comando 'composer'.
 <br>
 ## 2º Instalação do Laravel e projeto em pasta especifica
-composer create-project --prefer-dist laravel/laravel name-project'
+composer create-project --prefer-dist laravel/laravel blog "5.8.*"
 <br>
 ## 3º Cria o banco de dados sem as tabelas.
 <br>
